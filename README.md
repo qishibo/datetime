@@ -7,14 +7,19 @@
 
 >> 该工具基于GTK实现, 所以系统要安装GTK && GCC环境.
 
-![效果图](http://ww1.sinaimg.cn/large/71405cably1flwmp6u7odj20i50ac3yj.jpg)
+![效果图](https://github.com/qishibo/datetime/raw/master/clock.png)
 
 # Usage
 
 ```
+# 编译成可执行文件
 gcc  -Wall -g -o clock clock.c `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 
+# 每次使用执行
 ./clock
+
+# 加入到bin目录 增加快捷键映射 指向 /usr/local/bin/clock, 以后每次直接按快捷键即可
+sudo move clock /usr/local/bin/
 
 # 任意键退出
 ```
