@@ -24,67 +24,42 @@ int main(int argc,char *argv[])
     time (&t);//获取Unix时间戳。
     lt = localtime (&t);//转为时间结构。
 
-    // 星期几
-    char* xingqi;
-    switch (lt->tm_wday)
-    {
-        case 0:
-            xingqi="星期一";
-            break;
-        case 1:
-            xingqi="星期二";
-            break;
-        case 2:
-            xingqi="星期三";
-            break;
-        case 3:
-            xingqi="星期四";
-            break;
-        case 4:
-            xingqi="星期五";
-            break;
-        case 5:
-            xingqi="星期六";
-            break;
-        case 6:
-            xingqi="星期日";
-            break;
-    }
+    // 拼接显示字段
+    const char *week[] = {"日", "一", "二", "三", "四", "五", "六"};
+    sprintf (nowTime, "%d-%d-%d  星期%s %d:%d:%d\n",lt->tm_year+1900, lt->tm_mon+1, lt->tm_mday, week[lt->tm_wday], lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
 
-    sprintf (nowTime, "%d-%d-%d %s %d:%d:%d\n",lt->tm_year+1900, lt->tm_mon+1, lt->tm_mday, xingqi, lt->tm_hour, lt->tm_min, lt->tm_sec);//输出结果
-
-
+    // 初始化GUI
     GtkWidget *window;
     GtkWidget *label;
-    char title[]="当前时间";
+
     gtk_init(&argc, &argv);
+
+    // 主窗口
     window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), title);
+    gtk_window_set_title(GTK_WINDOW(window), "当前时间");
+
     // 窗口尺寸
     gtk_window_set_default_size(GTK_WINDOW (window),600,300);
     gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);//设置窗口位置
-    // gtk_widget_realize (window);//实现上述窗口
-    g_signal_connect (window, "destroy", gtk_main_quit, NULL);//窗口信号连接，点击关闭按钮是会关闭窗口。
 
+    // 显示时间的label控件
     label=gtk_label_new(nowTime);
 
     // 设置label字体样式
     char labelText[100];
     sprintf(labelText, "<span foreground='#6784b2' font_desc='28' underline='none' underline_color='lightgrey'>%s</span>",nowTime);
-    gtk_label_set_markup(
-        GTK_LABEL(label),
-        labelText
-    );
+    gtk_label_set_markup(GTK_LABEL(label), labelText);
 
-    gtk_container_add(GTK_CONTAINER(window), label);
-    gtk_widget_show(window);
-    gtk_widget_show(label);
-
+    // 窗口信号连接，点击关闭按钮时会关闭窗口
+    g_signal_connect (window, "destroy", gtk_main_quit, NULL);
     // 处理热键
     g_signal_connect(window, "key-press-event", G_CALLBACK(deal_key_press), NULL);
 
+    // 主窗口添加label
+    gtk_container_add(GTK_CONTAINER(window), label);
+    gtk_widget_show(window);
+    gtk_widget_show(label);
     gtk_main();
+
     return 0;
 }
-
-
