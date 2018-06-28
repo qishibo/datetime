@@ -5,7 +5,7 @@
 
 有了这个工具之后, 系统增加一个快捷键(如alt + d)直接指向这个可执行文件, 唰的一下子, 日期就显示出来了! 然后按任意键, 该窗口又自动消失, 目的达到.
 
->> 该工具基于GTK实现, 所以系统要安装GTK && GCC环境.
+> 该工具基于GTK实现, 所以系统要安装GTK && GCC环境.
 
 ![效果图](https://github.com/qishibo/datetime/raw/master/clock.png)
 
