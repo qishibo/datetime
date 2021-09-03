@@ -7,7 +7,7 @@
 
 > 该工具基于GTK实现, 所以系统要安装GTK && GCC环境.
 
-![效果图](https://github.com/qishibo/datetime/raw/master/clock.png)
+![效果图](https://cdn.jsdelivr.net/gh/qishibo/img/202109031642605.png)
 
 # Usage
 
